@@ -26,11 +26,11 @@ const HomeContent = ({ defaultPage }) => {
         {isLoading ? (
           <div className="flex flex-col gap-4 justify-center items-center  max-w-80 w-full m-auto min-h-[50vh] ">
             <Spinner />
-            <p className="text-center">
+            {/* <p className="text-center">
               Devido ao banco de dados estar hospedado em uma plataforma
               gratuita, a 1° resposta pode demorar de 1 a 3 minutos. Por favor,
               aguarde!
-            </p>
+            </p> */}
           </div>
         ) : (
           <>
