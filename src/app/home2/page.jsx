@@ -1,6 +1,5 @@
 import { BASE_URL } from "@/consts";
 import HomeContent from "./components/Content";
-import { ProductsService } from "@/services/products";
 
 const Home = async ({ searchParams }) => {
   let page = 1;
@@ -12,7 +11,6 @@ const Home = async ({ searchParams }) => {
     `${BASE_URL}/products?page=${page}&perPage=${perPage}`
   );
   const data = await response.json();
-  console.log(data);
 
   return (
     <div className="min-h-screen ">

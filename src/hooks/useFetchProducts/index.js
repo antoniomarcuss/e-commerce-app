@@ -17,16 +17,6 @@ const useFetchProducts = ({ defaultPage = 1, perPage = 15 }) => {
     queryFn: async () => (await ProductsService.findAll(page, perPage)).data,
   });
 
-  useEffect(() => {
-    setTotalPages(data?.numberOfPages || 1);
-    const pageFromParams = Number(searchParams.get("page"));
-    if (pageFromParams && pageFromParams > 0) {
-      setPage(pageFromParams);
-      return;
-    }
-    setPage(1);
-  }, [searchParams, data]);
-
   const changePage = (pageNumber) => {
     if (pageNumber < 1 || pageNumber > totalPages) {
       return;
@@ -34,6 +24,19 @@ const useFetchProducts = ({ defaultPage = 1, perPage = 15 }) => {
     setPage(pageNumber);
     router.push(`${pathname}?page=${pageNumber}`);
   };
+
+  useEffect(() => {
+    setTotalPages(data?.numberOfPages || 1);
+  }, [data]);
+
+  useEffect(() => {
+    const pageFromParams = Number(searchParams.get("page"));
+    if (pageFromParams && pageFromParams > 0) {
+      setPage(pageFromParams);
+      return;
+    }
+    setPage(1);
+  }, [searchParams]);
 
   return {
     products: data?.products || [],

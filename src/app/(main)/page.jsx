@@ -6,10 +6,6 @@ import {
 import HomeContent from "./components/Content";
 import { BASE_URL } from "@/consts";
 
-export const metadata = {
-  title: "Home",
-  description: "Olá home",
-};
 const Home = async ({ searchParams }) => {
   let page = 1;
   const perPage = 10;
