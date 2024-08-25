@@ -5,9 +5,10 @@ import CartModal from "@/components/CartModal";
 import Spinner from "@/components/Spinner";
 import { BASE_URL } from "@/consts";
 import Image from "next/image";
-import useProductViewModel from "../../[productId]/useProductViewModel";
-import { useProductCardViewModel } from "@/app/(main)/components/ProductCard/useProductCardViewModel";
+
 import { userCartStore } from "@/stores/cartStore";
+import { useProductCardViewModel } from "@/app/(main)/components/ProductCard/useProductCardViewModel";
+import useProductViewModel from "./useProductViewModel";
 
 const Products = ({ productId }) => {
   const { product, isLoading, isError } = useProductViewModel(productId);

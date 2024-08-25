@@ -1,5 +1,5 @@
+import { ProductsService } from "@/services/products";
 import { useQuery } from "@tanstack/react-query";
-import { ProductsService } from "../../../../services/products";
 
 const useProductViewModel = (productId) => {
   const {

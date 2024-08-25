@@ -23,7 +23,7 @@ export const generateMetadata = async ({ params: { productId } }) => {
   };
 };
 
-const ViewProduct = ({ params: { productId } }) => {
+const ViewProductById = ({ params: { productId } }) => {
   return (
     <div>
       <div>
@@ -36,4 +36,4 @@ const ViewProduct = ({ params: { productId } }) => {
   );
 };
 
-export default ViewProduct;
+export default ViewProductById;
