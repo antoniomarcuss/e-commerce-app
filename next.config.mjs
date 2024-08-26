@@ -11,7 +11,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "shop-api-zsj5.onrender.com",
+        hostname: "shop-api-production-fde1.up.railway.app",
       },
     ],
   },
