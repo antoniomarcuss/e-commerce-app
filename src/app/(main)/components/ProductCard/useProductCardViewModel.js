@@ -1,5 +1,5 @@
+import { useCart } from "@/hooks/useCart";
 import { useState } from "react";
-import { useCart } from "../../../../hooks/useCart";
 
 export const useProductCardViewModel = (product) => {
   const { addItem } = useCart();

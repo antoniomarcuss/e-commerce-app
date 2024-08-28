@@ -6,14 +6,15 @@ import Spinner from "@/components/Spinner";
 import { BASE_URL } from "@/consts";
 import Image from "next/image";
 
-import { userCartStore } from "@/stores/cartStore";
 import { useProductCardViewModel } from "@/app/(main)/components/ProductCard/useProductCardViewModel";
+import { userCartStore } from "@/stores/cartStore";
 import useProductViewModel from "./useProductViewModel";
 
 const Products = ({ productId }) => {
   const { product, isLoading, isError } = useProductViewModel(productId);
   const { addToCart, openCartModal } = useProductCardViewModel(product);
   const items = userCartStore(({ items }) => items);
+
   return (
     <>
       {isLoading ? (

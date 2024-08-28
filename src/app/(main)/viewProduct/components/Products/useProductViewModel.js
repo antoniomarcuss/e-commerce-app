@@ -1,3 +1,4 @@
+'"use client";';
 import { ProductsService } from "@/services/products";
 import { useQuery } from "@tanstack/react-query";
 
@@ -9,11 +10,11 @@ const useProductViewModel = (productId) => {
   } = useQuery({
     queryKey: ["product", productId],
     queryFn: () => ProductsService.findById(productId),
-    refetchOnMount: false,
+    staleTime: Infinity,
   });
 
   return {
-    product: product?.data || [],
+    product,
     isLoading,
     isError,
   };

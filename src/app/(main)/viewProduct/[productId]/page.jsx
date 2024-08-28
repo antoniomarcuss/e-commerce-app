@@ -2,9 +2,15 @@ import { IoMdArrowBack } from "react-icons/io";
 import Link from "next/link";
 import Products from "../components/Products";
 import { ProductsService } from "@/services/products";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
 
 export const generateMetadata = async ({ params: { productId } }) => {
   const { data } = await ProductsService.findById(productId);
+
   return {
     title: data.name,
     description: data.description,
@@ -23,7 +29,19 @@ export const generateMetadata = async ({ params: { productId } }) => {
   };
 };
 
-const ViewProductById = ({ params: { productId } }) => {
+const ViewProductById = async ({ params: { productId } }) => {
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: ["product", productId],
+    queryFn: async () => {
+      const { data } = await ProductsService.findById(productId);
+
+      return data;
+    },
+  });
+
+  const client = dehydrate(queryClient);
+
   return (
     <div>
       <div>
@@ -31,7 +49,9 @@ const ViewProductById = ({ params: { productId } }) => {
           <IoMdArrowBack className="text-2xl hover:text-blue-500 text-primary" />
         </Link>
       </div>
-      <Products productId={productId} />
+      <HydrationBoundary state={client}>
+        <Products productId={productId} />
+      </HydrationBoundary>
     </div>
   );
 };
