@@ -7,16 +7,26 @@ import Image from "next/image";
 
 import { useProductCardViewModel } from "@/app/(main)/components/ProductCard/useProductCardViewModel";
 import { userCartStore } from "@/stores/cartStore";
+import Link from "next/link";
+import { IoMdArrowBack } from "react-icons/io";
 
 const Products = ({ data: product }) => {
   const { addToCart, openCartModal } = useProductCardViewModel(product);
   const items = userCartStore(({ items }) => items);
+  const currentPage =
+    typeof window !== "undefined"
+      ? new URLSearchParams(window.location.search).get("page") || 1
+      : 1;
+  console.log(currentPage);
 
   return (
-    <>
+    <div>
+      <Link href={`/?page=${currentPage}`}>
+        <IoMdArrowBack className="text-2xl hover:text-blue-500 text-primary" />
+      </Link>
       <div className="min-h-[80vh]  flex items-center justify-center">
         <div className="flex flex-col  md:flex-row gap-2 md:gap-8 items-center justify-center  rounded-md p-2 md:shadow-lg   md:p-6  ">
-          <div className=" max-w-60  md:max-w-80  w-full">
+          <div className=" min-w-80 max-w-60  md:max-w-80  w-full">
             <Image
               className="w-full"
               width={300}
@@ -24,7 +34,7 @@ const Products = ({ data: product }) => {
               src={
                 product.imgSrc
                   ? `${BASE_URL}/${product.imgSrc}`
-                  : "./defalt.webp"
+                  : "/defalt.webp"
               }
               alt=""
             />
@@ -64,7 +74,7 @@ const Products = ({ data: product }) => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

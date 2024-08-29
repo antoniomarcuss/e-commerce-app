@@ -12,9 +12,14 @@ import Image from "next/image";
 const ProductCard = ({ product }) => {
   const { addToCart, openCartModal } = useProductCardViewModel(product);
   const items = userCartStore(({ items }) => items);
+  const currentPage =
+    typeof window !== "undefined"
+      ? new URLSearchParams(window.location.search).get("page") || 1
+      : 1;
+
   return (
     <div className=" rounded-lg border  ">
-      <Link href={`viewProduct/${product.id}`}>
+      <Link href={`viewProduct/${product.id}?page=${currentPage}`}>
         <abbr title="Ver produto">
           <div className="  h-36">
             <Image

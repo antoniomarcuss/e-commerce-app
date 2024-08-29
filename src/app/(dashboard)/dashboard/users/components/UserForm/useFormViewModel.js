@@ -74,7 +74,6 @@ export const useFormViewModel = (userId) => {
         }
         setError("role", { message: errorMessage });
       } else {
-        console.error("Erro desconhecido:", error);
         alert("Ocorreu um erro inesperado. Por favor, tente novamente.");
       }
     }

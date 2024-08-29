@@ -1,5 +1,3 @@
-import { IoMdArrowBack } from "react-icons/io";
-import Link from "next/link";
 import Products from "../components/Products";
 import { ProductsService } from "@/services/products";
 import { BASE_URL } from "@/consts";
@@ -33,12 +31,6 @@ const ViewProductById = async ({ params: { productId } }) => {
 
   return (
     <div>
-      <div>
-        <Link href="/">
-          <IoMdArrowBack className="text-2xl hover:text-blue-500 text-primary" />
-        </Link>
-      </div>
-
       <Products data={data} />
     </div>
   );
