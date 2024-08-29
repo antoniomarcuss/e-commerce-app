@@ -1,4 +1,3 @@
-"use client";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./consts";
@@ -7,16 +6,10 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import currency from "currency.js";
 import { ProductsService } from "../../../../../../services/products";
 import { CategoriesService } from "../../../../../../services/categories";
-import { LogicModal } from "../../../../../../components/Modal/logicModal";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-export const useProductFormViewModel = (
-  productId,
-  page,
-  totalPages,
-  changePage
-) => {
+export const useProductFormViewModel = (productId) => {
   const {
     register,
     handleSubmit,
@@ -101,7 +94,7 @@ export const useProductFormViewModel = (
     if (productId) {
       try {
         await ProductsService.update(productId, body);
-        if (typeof data.file !== "string") {
+        if (typeof data.file !== "string" && data.insertImg && data.file) {
           await uploadImage(data.file, productId);
         }
         router.push("/dashboard/products");
@@ -131,28 +124,6 @@ export const useProductFormViewModel = (
     });
   };
 
-  const paginationProps = {
-    page: page,
-    isPreviousDisabled: page === 1,
-    isNextDisabled: page === totalPages,
-    onClickPrevious: () => changePage(page - 1),
-    onClickNext: () => changePage(page + 1),
-  };
-
-  const {
-    modalProps,
-    productId: productIdModal,
-    setProductId,
-    mutation,
-    setModalIsOpen,
-    deletingUserIds,
-  } = LogicModal(ProductsService, "product");
-
-  const handleDelete = (id) => {
-    setProductId(id);
-    setModalIsOpen(true);
-  };
-
   return {
     file,
     formState,
@@ -165,15 +136,7 @@ export const useProductFormViewModel = (
     onSubmitHandler,
     onPriceChangeHandler,
     onStockChangeHandler,
-    modalProps,
-    productIdModal,
-    setProductId,
-    mutation,
-    setModalIsOpen,
-    paginationProps,
     isLoading: isLoadingCategory || isLoadingId,
     isError: isErrorCategory || isErrorId,
-    handleDelete,
-    deletingUserIds,
   };
 };

@@ -9,21 +9,17 @@ import Image from "next/image";
 import useFetchProducts from "@/hooks/useFetchProducts";
 import Modal from "@/components/Modal";
 import Pagination from "@/components/Pagination";
-import { useProductFormViewModel } from "../ProductForm/useProductFormViewModel";
+
 import Link from "next/link";
+import useProductContentViewModel from "./useProductContentViewModel";
 
 const ProductsContent = () => {
-  const { products, page, totalPages, changePage } = useFetchProducts({
-    perPage: 6,
-  });
-  const {
-    modalProps,
-    handleDelete,
-    deletingUserIds,
-    paginationProps,
-    isLoading,
-    isError,
-  } = useProductFormViewModel(null, page, totalPages, changePage);
+  const { products, page, totalPages, changePage, isError, isLoading } =
+    useFetchProducts({
+      perPage: 6,
+    });
+  const { modalProps, handleDelete, deletingUserIds, paginationProps } =
+    useProductContentViewModel(page, totalPages, changePage);
   return (
     <>
       {isLoading ? (

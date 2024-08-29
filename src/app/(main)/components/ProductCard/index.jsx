@@ -16,12 +16,12 @@ const ProductCard = ({ product }) => {
     <div className=" rounded-lg border  ">
       <Link href={`viewProduct/${product.id}`}>
         <abbr title="Ver produto">
-          <div>
+          <div className="  h-36">
             <Image
               src={
                 product.imgSrc
                   ? `${BASE_URL}/${product.imgSrc}`
-                  : "./defalt.webp"
+                  : "/defalt.webp"
               }
               width={150}
               height={150}

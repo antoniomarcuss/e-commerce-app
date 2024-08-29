@@ -26,6 +26,8 @@ const useFetchProducts = ({ defaultPage = 1, perPage = 15 }) => {
   };
 
   useEffect(() => {
+    console.log(data);
+
     setTotalPages(data?.numberOfPages || 1);
   }, [data]);
 
