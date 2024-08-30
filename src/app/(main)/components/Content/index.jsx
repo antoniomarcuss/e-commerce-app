@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { useHomeContentViewModel } from "./useHomeContentViewModel";
 import SearchBar from "../SearchBar";
 import Spinner from "@/components/Spinner";

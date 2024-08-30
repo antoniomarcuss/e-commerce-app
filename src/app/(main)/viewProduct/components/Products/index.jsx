@@ -1,29 +1,14 @@
-"use client";
-import { IoCartOutline } from "react-icons/io5";
 import formatToCurrency from "@/utils/formatToCurrency";
-import CartModal from "@/components/CartModal";
 import { BASE_URL } from "@/consts";
 import Image from "next/image";
 
-import { useProductCardViewModel } from "@/app/(main)/components/ProductCard/useProductCardViewModel";
-import { userCartStore } from "@/stores/cartStore";
-import Link from "next/link";
-import { IoMdArrowBack } from "react-icons/io";
+import ButtonAddProduct from "../ButtonAddProduct";
+import BackButton from "../BackButton";
 
 const Products = ({ data: product }) => {
-  const { addToCart, openCartModal } = useProductCardViewModel(product);
-  const items = userCartStore(({ items }) => items);
-  const currentPage =
-    typeof window !== "undefined"
-      ? new URLSearchParams(window.location.search).get("page") || 1
-      : 1;
-  console.log(currentPage);
-
   return (
     <div>
-      <Link href={`/?page=${currentPage}`}>
-        <IoMdArrowBack className="text-2xl hover:text-blue-500 text-primary" />
-      </Link>
+      <BackButton />
       <div className="min-h-[80vh]  flex items-center justify-center">
         <div className="flex flex-col  md:flex-row gap-2 md:gap-8 items-center justify-center  rounded-md p-2 md:shadow-lg   md:p-6  ">
           <div className=" min-w-80 max-w-60  md:max-w-80  w-full">
@@ -57,20 +42,7 @@ const Products = ({ data: product }) => {
                 </p>
               </div>
             </div>
-
-            <div className=" w-full ">
-              <button
-                className="bg-primary text-white w-full p-3 rounded-lg   hover:bg-blue-600 transition-colors duration-200 "
-                type="button"
-                onClick={addToCart}
-              >
-                <div className="flex  justify-center md:items-center  gap-2">
-                  <IoCartOutline className="text-2xl  " />
-                  <span className="text-lg">Adicionar ao carrinho</span>
-                </div>
-              </button>
-              {openCartModal && <CartModal items={items} />}
-            </div>
+            <ButtonAddProduct product={product} />
           </div>
         </div>
       </div>
