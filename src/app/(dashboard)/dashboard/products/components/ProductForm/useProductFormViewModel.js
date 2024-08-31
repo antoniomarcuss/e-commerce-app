@@ -57,7 +57,7 @@ export const useProductFormViewModel = (productId) => {
     isError: isErrorCategory,
   } = useQuery({
     queryKey: ["categories"],
-    queryFn: () => CategoriesService.findAll(),
+    queryFn: async () => (await CategoriesService.findAll()).data,
     refetchOnMount: false,
   });
 
@@ -128,7 +128,7 @@ export const useProductFormViewModel = (productId) => {
     file,
     formState,
     control,
-    categories: categoriesData?.data || [],
+    categories: categoriesData,
     insertImg,
     register,
     reset,

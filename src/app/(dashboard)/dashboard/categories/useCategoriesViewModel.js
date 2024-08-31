@@ -5,8 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 export const useCategoriesViewModel = () => {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["categories"],
-    queryFn: CategoriesService.findAll,
-    refetchOnMount: false,
+    queryFn: async () => (await CategoriesService.findAll()).data,
+    // refetchOnMount: false,
   });
   const {
     modalProps,
@@ -23,7 +23,7 @@ export const useCategoriesViewModel = () => {
   };
 
   return {
-    categories: data?.data || [],
+    categories: data,
     isLoading,
     isError,
     categoryIdModal,

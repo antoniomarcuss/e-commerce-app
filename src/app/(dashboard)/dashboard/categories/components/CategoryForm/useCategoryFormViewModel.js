@@ -32,29 +32,48 @@ export const useCategoryFormViewModel = (categoryId) => {
     }
   }, [categoryId, data, reset]);
 
+  // const onSubmitHandler = async (formData) => {
+  //   try {
+  //     if (categoryId) {
+  //       await CategoriesService.update(categoryId, formData);
+  //       queryClient.setQueryData(["categories"], (current) => {
+  //         const updatedCategories = current?.data.map((category) =>
+  //           category.id.toString() === categoryId
+  //             ? { ...category, name: formData.name }
+  //             : category
+  //         );
+  //         return { ...current, data: updatedCategories };
+  //       });
+  //     } else {
+  //       const newCategory = await CategoriesService.create(formData);
+
+  //       // Atualização otimista
+  //       queryClient.setQueryData(["categories"], (current) => ({
+  //         ...current,
+  //         data: [...current?.data, newCategory.data],
+  //       }));
+  //     }
+  //     router.push("/dashboard/categories");
+  //     queryClient.invalidateQueries("categories");
+  //   } catch (error) {
+  //     setError("name", {
+  //       message: categoryId
+  //         ? "Não foi possível editar a categoria!"
+  //         : "Não foi possível criar a categoria!",
+  //     });
+  //   }
+  // };
+
   const onSubmitHandler = async (formData) => {
     try {
       if (categoryId) {
         await CategoriesService.update(categoryId, formData);
-        queryClient.setQueryData(["categories"], (current) => {
-          const updatedCategories = current?.data.map((category) =>
-            category.id.toString() === categoryId
-              ? { ...category, name: formData.name }
-              : category
-          );
-          return { ...current, data: updatedCategories };
-        });
       } else {
-        const newCategory = await CategoriesService.create(formData);
-
-        // Atualização otimista
-        queryClient.setQueryData(["categories"], (current) => ({
-          ...current,
-          data: [...current?.data, newCategory.data],
-        }));
+        await CategoriesService.create(formData);
       }
+      await queryClient.invalidateQueries(["categories"]);
+
       router.push("/dashboard/categories");
-      queryClient.invalidateQueries("categories");
     } catch (error) {
       setError("name", {
         message: categoryId
