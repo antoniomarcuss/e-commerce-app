@@ -1,5 +1,4 @@
 "use client";
-import { IoAdd } from "react-icons/io5";
 import { format } from "date-fns";
 import { useCategoriesViewModel } from "../../useCategoriesViewModel";
 import Spinner from "@/components/Spinner";
@@ -18,14 +17,7 @@ const CategoryContent = () => {
     deletingUserIds,
   } = useCategoriesViewModel();
   return (
-    <div className="custom-container">
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-medium">Categorias</h1>
-        <Link href="/dashboard/categories/create">
-          <IoAdd className="text-4xl text-primary hover:opacity-75 " />
-        </Link>
-      </div>
-
+    <>
       <div className="overflow-x-auto">
         {isLoading ? (
           <div className=" flex justify-center min-h-[60vh]  items-center   ">
@@ -92,7 +84,7 @@ const CategoryContent = () => {
         )}
       </div>
       <Modal {...modalProps} />
-    </div>
+    </>
   );
 };
 

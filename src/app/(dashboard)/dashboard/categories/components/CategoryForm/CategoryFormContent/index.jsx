@@ -2,7 +2,7 @@
 
 import Spinner from "@/components/Spinner";
 import { useCategoryFormViewModel } from "../useCategoryFormViewModel";
-const CategoryFormContent = () => {
+const CategoryFormContent = ({ categoryId }) => {
   const {
     register,
     handleSubmit,

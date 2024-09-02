@@ -6,7 +6,6 @@ export const useCategoriesViewModel = () => {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => (await CategoriesService.findAll()).data,
-    // refetchOnMount: false,
   });
   const {
     modalProps,

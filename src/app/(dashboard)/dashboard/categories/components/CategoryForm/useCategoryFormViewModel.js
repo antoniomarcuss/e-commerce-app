@@ -22,57 +22,44 @@ export const useCategoryFormViewModel = (categoryId) => {
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["category", categoryId],
-    queryFn: () => CategoriesService.findById(categoryId),
+    queryFn: async () => (await CategoriesService.findById(categoryId)).data,
     enabled: !!categoryId,
   });
 
   useEffect(() => {
-    if (categoryId && data?.data) {
-      reset({ name: data.data.name });
+    if (categoryId && data) {
+      reset({ name: data.name });
     }
   }, [categoryId, data, reset]);
 
-  // const onSubmitHandler = async (formData) => {
-  //   try {
-  //     if (categoryId) {
-  //       await CategoriesService.update(categoryId, formData);
-  //       queryClient.setQueryData(["categories"], (current) => {
-  //         const updatedCategories = current?.data.map((category) =>
-  //           category.id.toString() === categoryId
-  //             ? { ...category, name: formData.name }
-  //             : category
-  //         );
-  //         return { ...current, data: updatedCategories };
-  //       });
-  //     } else {
-  //       const newCategory = await CategoriesService.create(formData);
+  const updateCategory = async (formData) => {
+    await CategoriesService.update(categoryId, formData);
+    queryClient.setQueryData(["categories"], (current) => {
+      const updatedCategories = current.map((category) =>
+        category.id.toString() === categoryId
+          ? { ...category, name: formData.name }
+          : category
+      );
+      return updatedCategories;
+    });
+  };
 
-  //       // Atualização otimista
-  //       queryClient.setQueryData(["categories"], (current) => ({
-  //         ...current,
-  //         data: [...current?.data, newCategory.data],
-  //       }));
-  //     }
-  //     router.push("/dashboard/categories");
-  //     queryClient.invalidateQueries("categories");
-  //   } catch (error) {
-  //     setError("name", {
-  //       message: categoryId
-  //         ? "Não foi possível editar a categoria!"
-  //         : "Não foi possível criar a categoria!",
-  //     });
-  //   }
-  // };
+  const createCategory = async (formData) => {
+    const newCategory = (await CategoriesService.create(formData)).data;
+
+    queryClient.setQueryData(["categories"], (current) => [
+      ...current,
+      newCategory,
+    ]);
+  };
 
   const onSubmitHandler = async (formData) => {
     try {
       if (categoryId) {
-        await CategoriesService.update(categoryId, formData);
+        updateCategory(formData);
       } else {
-        await CategoriesService.create(formData);
+        createCategory(formData);
       }
-      await queryClient.invalidateQueries(["categories"]);
-
       router.push("/dashboard/categories");
     } catch (error) {
       setError("name", {
