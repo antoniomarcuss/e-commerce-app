@@ -21,7 +21,7 @@ const ProductCard = ({ product }) => {
     <div className=" rounded-lg border  ">
       <Link href={`viewProduct/${product.id}?page=${currentPage}`}>
         <abbr title="Ver produto">
-          <div className="  h-36">
+          <div>
             <Image
               src={
                 product.imgSrc

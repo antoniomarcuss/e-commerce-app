@@ -5,11 +5,10 @@ import { ProductsService } from "@/services/products";
 export const useHomeContentViewModel = (defaultPage) => {
   const [searchedProducts, setSearchedProducts] = useState([]);
   const [searchValue, setSearchValue] = useState("");
-  const { products, page, totalPages, isLoading, changePage } =
-    useFetchProducts({
-      perPage: 10,
-      defaultPage,
-    });
+  const { products, page, totalPages, changePage } = useFetchProducts({
+    perPage: 10,
+    defaultPage,
+  });
 
   const onChangeSearchHandler = throttle(async (value) => {
     if (value) {
@@ -27,7 +26,6 @@ export const useHomeContentViewModel = (defaultPage) => {
     products,
     page,
     totalPages,
-    isLoading,
     changePage,
     onChangeSearchHandler,
   };

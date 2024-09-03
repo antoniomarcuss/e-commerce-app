@@ -1,4 +1,13 @@
+import { ProductsService } from "@/services/products";
 import ProductForm from "../../components/ProductForm";
+
+export const generateStaticParams = async () => {
+  const { data } = await ProductsService.findAll();
+
+  return data.products.map((product) => ({
+    productId: String(product.id),
+  }));
+};
 
 const EditProduct = ({ params: { productId } }) => {
   return (

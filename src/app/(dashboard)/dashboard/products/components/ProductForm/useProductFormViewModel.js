@@ -27,38 +27,29 @@ export const useProductFormViewModel = (productId) => {
   const file = watch("file");
   const insertImg = watch("insertImg");
 
-  const {
-    data,
-    isLoading: isLoadingId,
-    isError: isErrorId,
-  } = useQuery({
+  const { data } = useQuery({
     queryKey: ["product", productId],
-    queryFn: async () => await ProductsService.findById(productId),
+    queryFn: async () => (await ProductsService.findById(productId)).data,
     enabled: !!productId,
   });
 
   useEffect(() => {
-    if (productId && data?.data) {
+    if (productId && data) {
       reset({
-        name: data.data.name,
-        description: data.data.description,
-        price: data.data.price.toFixed(2),
-        stock: data.data.stock.toString(),
-        category: data.data.category.id.toString(),
-        file: data.data.imgSrc,
-        insertImg: !!data.data.imgSrc,
+        name: data.name,
+        description: data.description,
+        price: data.price.toFixed(2),
+        stock: data.stock.toString(),
+        category: data.category.id.toString(),
+        file: data.imgSrc,
+        insertImg: !!data.imgSrc,
       });
     }
   }, [productId, data, reset]);
 
-  const {
-    data: categoriesData,
-    isLoading: isLoadingCategory,
-    isError: isErrorCategory,
-  } = useQuery({
+  const { data: categoriesData } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => (await CategoriesService.findAll()).data,
-    refetchOnMount: false,
   });
 
   const onPriceChangeHandler = (event) => {
@@ -128,7 +119,7 @@ export const useProductFormViewModel = (productId) => {
     file,
     formState,
     control,
-    categories: categoriesData,
+    categories: categoriesData || [],
     insertImg,
     register,
     reset,
@@ -136,7 +127,5 @@ export const useProductFormViewModel = (productId) => {
     onSubmitHandler,
     onPriceChangeHandler,
     onStockChangeHandler,
-    isLoading: isLoadingCategory || isLoadingId,
-    isError: isErrorCategory || isErrorId,
   };
 };

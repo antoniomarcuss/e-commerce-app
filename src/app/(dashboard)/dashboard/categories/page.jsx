@@ -8,13 +8,6 @@ import { CategoriesService } from "@/services/categories";
 import Link from "next/link";
 import { IoAdd } from "react-icons/io5";
 
-export const generateStaticParams = async () => {
-  const { data } = await CategoriesService.findAll();
-  console.log(data);
-
-  return data.map((category) => ({ categoryId: String(category.id) }));
-};
-
 const Categories = async () => {
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({

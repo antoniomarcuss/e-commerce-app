@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 
-const useFetchProducts = ({ defaultPage = 1, perPage = 15 }) => {
+const useFetchProducts = ({ defaultPage = 1, perPage = 10 }) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();

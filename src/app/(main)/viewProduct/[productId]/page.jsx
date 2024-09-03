@@ -23,6 +23,14 @@ export const generateMetadata = async ({ params: { productId } }) => {
   };
 };
 
+export const generateStaticParams = async () => {
+  const { data } = await ProductsService.findAll();
+
+  return data.products.map((product) => ({
+    productId: String(product.id),
+  }));
+};
+
 const ViewProductById = async ({ params: { productId } }) => {
   const response = await fetch(`${BASE_URL}/products/${productId}`, {
     next: { revalidate: 10 },

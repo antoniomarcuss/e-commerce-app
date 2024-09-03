@@ -12,7 +12,6 @@ const HomeContent = ({ defaultPage }) => {
     products,
     page,
     totalPages,
-    isLoading,
     changePage,
     onChangeSearchHandler,
   } = useHomeContentViewModel(defaultPage);
@@ -22,31 +21,26 @@ const HomeContent = ({ defaultPage }) => {
       <SearchBar onChange={onChangeSearchHandler} />
       <div className="mt-10  ">
         <h1 className="font-medium text-3xl">Produtos</h1>
-        {isLoading ? (
-          <div className="flex flex-col gap-4 justify-center items-center  max-w-80 w-full m-auto min-h-[50vh] ">
-            <Spinner />
-          </div>
-        ) : (
-          <>
-            {searchValue ? (
-              <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 lg:grid-cols-5 mt-6  justify-items-center   sm:justify-items-start  ">
-                {searchedProducts.map((product) => (
-                  <li key={product.id}>
-                    <ProductCard product={product} />
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <ul className="grid grid-cols-2 sm:grid-cols-3  md:grid-cols-4 gap-2 lg:grid-cols-5 mt-6  justify-items-center   sm:justify-items-start  ">
-                {products.map((product) => (
-                  <li key={product.id}>
-                    <ProductCard product={product} />
-                  </li>
-                ))}
-              </ul>
-            )}
-          </>
-        )}
+
+        <>
+          {searchValue ? (
+            <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 lg:grid-cols-5 mt-6  justify-items-center   sm:justify-items-start  ">
+              {searchedProducts.map((product) => (
+                <li key={product.id}>
+                  <ProductCard product={product} />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <ul className="grid grid-cols-2 sm:grid-cols-3  md:grid-cols-4 gap-2 lg:grid-cols-5 mt-6  justify-items-center   sm:justify-items-start  ">
+              {products.map((product) => (
+                <li key={product.id}>
+                  <ProductCard product={product} />
+                </li>
+              ))}
+            </ul>
+          )}
+        </>
       </div>
 
       {!searchValue && (

@@ -6,14 +6,6 @@ import {
 import HomeContent from "./components/Content";
 import { BASE_URL } from "@/consts";
 
-export const generateStaticParams = async () => {
-  const { data } = await ProductsService.findAll();
-
-  return data.products.map((product) => ({
-    productId: String(product.id),
-  }));
-};
-
 const Home = async ({ searchParams }) => {
   let page = 1;
   const perPage = 10;

@@ -3,7 +3,11 @@ import { CategoriesService } from "../../../../services/categories";
 import { useQuery } from "@tanstack/react-query";
 
 export const useCategoriesViewModel = () => {
-  const { data, isLoading, isError } = useQuery({
+  const {
+    data: categories,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => (await CategoriesService.findAll()).data,
   });
@@ -22,7 +26,7 @@ export const useCategoriesViewModel = () => {
   };
 
   return {
-    categories: data,
+    categories,
     isLoading,
     isError,
     categoryIdModal,

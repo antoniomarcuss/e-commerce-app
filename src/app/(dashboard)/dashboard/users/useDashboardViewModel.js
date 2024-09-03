@@ -19,7 +19,7 @@ export const useDashboardViewModel = () => {
 
   useEffect(() => {
     setTotalPages(users?.data.numberOfPages || 1);
-  }, []);
+  }, [users?.data.numberOfPages]);
 
   const changePage = (page) => {
     if (page < 1 || page > totalPages) return;

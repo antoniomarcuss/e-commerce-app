@@ -1,4 +1,11 @@
+import { CategoriesService } from "@/services/categories";
 import CategoryForm from "../../components/CategoryForm";
+
+export const generateStaticParams = async () => {
+  const { data } = await CategoriesService.findAll();
+
+  return data.map((category) => ({ categoryId: String(category.id) }));
+};
 
 const EditCategory = async ({ params: { categoryId } }) => {
   return (
