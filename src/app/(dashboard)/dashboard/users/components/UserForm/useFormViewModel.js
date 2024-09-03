@@ -21,13 +21,9 @@ export const useFormViewModel = (userId) => {
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  const {
-    data,
-    isLoading: isLoadingUser,
-    isError: isErrorUsers,
-  } = useQuery({
+  const { data } = useQuery({
     queryKey: ["user", userId],
-    queryFn: () => UsersService.findById(userId),
+    queryFn: async () => (await UsersService.findById(userId)).data,
     enabled: !!userId,
   });
 
@@ -80,12 +76,12 @@ export const useFormViewModel = (userId) => {
   };
 
   useEffect(() => {
-    if (userId && data?.data) {
+    if (userId && data) {
       reset({
-        name: data.data.name,
-        email: data.data.email,
+        name: data.name,
+        email: data.email,
         password: "1234",
-        role: data.data.role.id.toString(),
+        role: data.role.id.toString(),
       });
     }
   }, [userId, data, reset]);
@@ -95,8 +91,6 @@ export const useFormViewModel = (userId) => {
     errors,
     isDirty,
     isSubmitting,
-    isLoading: isLoadingRoles || isLoadingUser,
-    isError: isErrorUsers || isErrorRoles,
     register,
     handleSubmit,
     onSubmitHandler,
