@@ -4,7 +4,8 @@ describe("user CRUD", () => {
     cy.dashboardLogin("admin@admin.com", "admin");
   });
   it("Create user successful", () => {
-    cy.visit("/dashboard/users/create");
+    cy.visit("/dashboard/users");
+    cy.get("a[href='/dashboard/users/create']").click();
     cy.get("input[placeholder=Nome]").type("Yago");
     cy.get("input[placeholder=E-mail]").type("yago@gmail.com");
     cy.get("input[placeholder=Senha]").type("1234");
@@ -34,7 +35,8 @@ describe("user CRUD", () => {
     cy.createUser(userData, token).then((response) => {
       cy.visit("/dashboard/users");
       cy.get(`a[href="/dashboard/users/edit/${response.body.id}"]`).click();
-      cy.get("input[name='name']").clear().type("yane");
+      cy.get('input[name="name"]').clear().type("yane");
+      cy.get(".email").clear().type("yane@gmail.com");
       cy.get("button").contains("Editar").click();
       cy.contains("yane");
     });

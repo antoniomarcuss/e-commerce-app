@@ -12,7 +12,11 @@ const ProductForm = async ({ productId }) => {
 
   await queryClient.prefetchQuery({
     queryKey: ["product", productId],
-    queryFn: async () => (await ProductsService.findById(productId)).data,
+    queryFn: async () => {
+      const { data } = await ProductsService.findById(productId);
+
+      return data;
+    },
   });
 
   return (

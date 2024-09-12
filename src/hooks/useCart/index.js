@@ -18,7 +18,7 @@ export const useCart = () => {
   const user = useAuthStore(({ user }) => user);
 
   const { isLoading, isError } = useQuery({
-    queryKey: "cart",
+    queryKey: ["cart"],
     queryFn: CartsService.find,
     enabled: user && !isCartLoaded ? true : false,
     refetchOnMount: false,

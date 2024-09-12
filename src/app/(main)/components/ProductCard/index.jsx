@@ -18,9 +18,9 @@ const ProductCard = ({ product }) => {
       : 1;
 
   return (
-    <div className=" rounded-lg border  ">
+    <div className=" rounded-lg border  w-full sm:max-w-64 ">
       <Link href={`viewProduct/${product.id}?page=${currentPage}`}>
-        <abbr title="Ver produto">
+        <abbr title={`Ver ${product.name}`}>
           <div>
             <Image
               src={
@@ -44,7 +44,7 @@ const ProductCard = ({ product }) => {
           Restam {product.stock} no estoque
         </span>
         <button
-          className="bg-primary text-white w-full p-2 rounded-lg mt-2 flex justify-center items-center gap-1 hover:bg-blue-600 transition-colors duration-200 "
+          className="bg-primary text-white w-full p-2 rounded-lg mt-2 flex justify-center items-center gap-1 hover:bg-blue-600 transition-colors duration-200 add-to-cart-btn "
           type="button"
           onClick={addToCart}
         >

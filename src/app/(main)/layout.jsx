@@ -3,7 +3,7 @@ import Header from "../../components/Header";
 
 const HomeLayout = ({ children }) => {
   return (
-    <div className="custom-container">
+    <div className="custom-container ">
       <Header />
       {children}
     </div>

@@ -56,10 +56,12 @@ export const useCategoryFormViewModel = (categoryId) => {
   const onSubmitHandler = async (formData) => {
     try {
       if (categoryId) {
-        updateCategory(formData);
+        await updateCategory(formData);
       } else {
-        createCategory(formData);
+        await createCategory(formData);
       }
+      queryClient.invalidateQueries(["category", categoryId]);
+      queryClient.invalidateQueries(["categories"]);
       router.push("/dashboard/categories");
     } catch (error) {
       setError("name", {

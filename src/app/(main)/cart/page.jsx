@@ -33,7 +33,7 @@ const Cart = () => {
           <Link href="/">
             <IoMdArrowBack className="text-2xl hover:text-blue-500 text-primary" />
           </Link>
-          Total: {formatToCurrency(total)}
+          <span id="total">Total: {formatToCurrency(total)}</span>
         </div>
         {isLoading ? (
           <div className=" flex justify-center min-h-[60vh]  items-center   ">
@@ -77,20 +77,20 @@ const Cart = () => {
                         <button
                           type="button"
                           onClick={() => changeQuantity(id, qty - 1)}
-                          className="md:text-lg text-red-400"
+                          className="md:text-lg text-red-400 minus-btn"
                         >
                           <FiMinus />
                         </button>
                         <input
                           type="text"
-                          className="    text-center w-10 outline-none p-2 border rounded-lg "
+                          className="  text-center w-10 outline-none p-2 border rounded-lg "
                           value={qty}
                           onChange={(e) => handleInputChange(e, id)}
                         />
                         <button
                           type="button"
                           onClick={() => changeQuantity(id, qty + 1)}
-                          className="md:text-lg text-primary"
+                          className="md:text-lg text-primary plus-btn"
                         >
                           <FiPlus />
                         </button>
@@ -104,7 +104,7 @@ const Cart = () => {
                           setModalIsOpen(true);
                         }}
                         type="button"
-                        className="flex items-center justify-center"
+                        className="flex items-center justify-center delete-item-to-cart"
                       >
                         {deletingId === id ? (
                           <ImSpinner8 className="text-red-500 w-5 animate-spin" />

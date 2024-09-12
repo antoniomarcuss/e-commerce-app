@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import Spinner from "@/components/Spinner";
 import { useFormViewModel } from "../useFormViewModel";
 
 const UseFormContent = ({ userId }) => {
@@ -9,7 +8,6 @@ const UseFormContent = ({ userId }) => {
     errors,
     isDirty,
     isSubmitting,
-
     register,
     handleSubmit,
     onSubmitHandler,
@@ -36,7 +34,7 @@ const UseFormContent = ({ userId }) => {
         <label className="flex flex-col gap-y-1 ">
           <span>Email: </span>
           <input
-            className="border w-full outline-none p-3 md:p-2 rounded-lg"
+            className="border w-full outline-none p-3 md:p-2 rounded-lg email"
             type="text"
             placeholder="E-mail"
             {...register("email")}

@@ -6,13 +6,15 @@ export const useHomeContentViewModel = (defaultPage) => {
   const [searchedProducts, setSearchedProducts] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const { products, page, totalPages, changePage } = useFetchProducts({
-    perPage: 10,
+    perPage: 12,
     defaultPage,
   });
 
   const onChangeSearchHandler = throttle(async (value) => {
+    setSearchedProducts("");
     if (value) {
       setSearchValue(value);
+
       const { data } = await ProductsService.search(value);
       setSearchedProducts(data);
       return;

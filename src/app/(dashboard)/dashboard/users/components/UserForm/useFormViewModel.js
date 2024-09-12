@@ -27,14 +27,9 @@ export const useFormViewModel = (userId) => {
     enabled: !!userId,
   });
 
-  const {
-    data: rolesData,
-    isLoading: isLoadingRoles,
-    isError: isErrorRoles,
-  } = useQuery({
+  const { data: rolesData } = useQuery({
     queryKey: ["roles"],
     queryFn: () => RolesService.findAll(),
-    refetchOnMount: false,
   });
 
   const onSubmitHandler = async (data) => {
@@ -76,7 +71,7 @@ export const useFormViewModel = (userId) => {
   };
 
   useEffect(() => {
-    if (userId && data) {
+    if (userId && data && rolesData) {
       reset({
         name: data.name,
         email: data.email,
@@ -84,7 +79,7 @@ export const useFormViewModel = (userId) => {
         role: data.role.id.toString(),
       });
     }
-  }, [userId, data, reset]);
+  }, [userId, data, reset, rolesData]);
 
   return {
     roles: rolesData?.data || [],

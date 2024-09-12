@@ -31,6 +31,7 @@ const ProductFormContent = ({ productId }) => {
             type="checkbox"
             className="toggle"
             {...register("insertImg")}
+            id="insertImg"
           />
         </label>
 
@@ -67,22 +68,26 @@ const ProductFormContent = ({ productId }) => {
         <label className="flex flex-col gap-y-1 ">
           <span className="font-medium text-lg">Nome: </span>
           <input
-            className="border w-full outline-none p-3 md:p-2 rounded-lg"
-            type="text"
-            placeholder=" Nome"
+            className="border w-full outline-none p-3 md:p-2 rounded-lg "
+            id="name"
+            type="text "
+            placeholder="Nome"
             {...register("name")}
           />
-          <span className="text-red-500">{formState.errors.name?.message}</span>
+          <span id="error-name" className="text-red-500">
+            {formState.errors.name?.message}
+          </span>
         </label>
         <label className="flex flex-col gap-y-1 ">
           <span className="font-medium text-lg">Preço: </span>
           <input
             className="border w-full outline-none p-3 md:p-2 rounded-lg"
+            id="price"
             type="text"
-            placeholder=" Preço"
+            placeholder="Preço"
             {...register("price", { onChange: onPriceChangeHandler })}
           />
-          <span className="text-red-500">
+          <span id="error-price" className="text-red-500">
             {formState.errors.price?.message}
           </span>
         </label>
@@ -91,10 +96,11 @@ const ProductFormContent = ({ productId }) => {
           <input
             className="border w-full outline-none p-3 md:p-2 rounded-lg"
             type="text"
+            id="stock"
             placeholder=" Estoque"
             {...register("stock", { onChange: onStockChangeHandler })}
           />
-          <span className="text-red-500">
+          <span id="error-stock" className="text-red-500">
             {formState.errors.stock?.message}
           </span>
         </label>
@@ -103,9 +109,10 @@ const ProductFormContent = ({ productId }) => {
           <textarea
             className="border p-2 h-24 outline-none rounded-lg"
             placeholder="Escreva aqui"
+            id="description"
             {...register("description")}
           ></textarea>
-          <span className="text-red-500">
+          <span id="error-description" className="text-red-500">
             {formState.errors.description?.message}
           </span>
         </label>
@@ -115,6 +122,7 @@ const ProductFormContent = ({ productId }) => {
           <select
             className="border p-2 outline-none rounded-lg "
             {...register("category")}
+            id="category"
           >
             <option value="">Selecione</option>
             {categories.map((category) => (
@@ -124,7 +132,7 @@ const ProductFormContent = ({ productId }) => {
             ))}
           </select>
 
-          <span className="text-red-500">
+          <span id="error-category" className="text-red-500">
             {formState.errors.category?.message}
           </span>
         </label>
@@ -133,7 +141,7 @@ const ProductFormContent = ({ productId }) => {
       <button
         type="submit"
         className="mt-7 bg-primary py-3 disabled:bg-opacity-30 
-        disabled:cursor-not-allowed rounded-lg text-white hover:bg-blue-500 md:py-2 "
+        disabled:cursor-not-allowed rounded-lg text-white hover:bg-blue-500 md:py-2 nextPage "
         disabled={!formState.isDirty || formState.isSubmitting}
       >
         {productId ? "Editar" : "Cadastrar"}

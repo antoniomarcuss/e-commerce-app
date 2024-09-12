@@ -5,7 +5,7 @@ import Image from "next/image";
 import ButtonAddProduct from "../ButtonAddProduct";
 import BackButton from "../BackButton";
 
-const Products = ({ data: product }) => {
+const Products = ({ product }) => {
   return (
     <div>
       <BackButton />

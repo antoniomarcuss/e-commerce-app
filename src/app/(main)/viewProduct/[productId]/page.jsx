@@ -32,14 +32,11 @@ export const generateStaticParams = async () => {
 };
 
 const ViewProductById = async ({ params: { productId } }) => {
-  const response = await fetch(`${BASE_URL}/products/${productId}`, {
-    next: { revalidate: 10 },
-  });
-  const data = await response.json();
+  const { data } = await ProductsService.findById(productId);
 
   return (
     <div>
-      <Products data={data} />
+      <Products product={data} />
     </div>
   );
 };

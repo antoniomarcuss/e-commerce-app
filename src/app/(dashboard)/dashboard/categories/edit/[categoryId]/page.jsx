@@ -7,7 +7,7 @@ export const generateStaticParams = async () => {
   return data.map((category) => ({ categoryId: String(category.id) }));
 };
 
-const EditCategory = async ({ params: { categoryId } }) => {
+const EditCategory = ({ params: { categoryId } }) => {
   return (
     <div className="custom-container">
       <h1 className="text-3xl font-medium">Editar Categoria</h1>

@@ -41,6 +41,7 @@ const MenuDashboard = ({
                 ir à Loja
               </Link>
               <button
+                id="logout"
                 className="flex items-center gap-2 font-medium hover:text-red-300"
                 type="button"
                 onClick={leaveHandler}

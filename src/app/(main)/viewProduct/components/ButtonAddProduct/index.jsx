@@ -11,7 +11,7 @@ const ButtonAddProduct = ({ product }) => {
   return (
     <div className=" w-full ">
       <button
-        className="bg-primary text-white w-full p-3 rounded-lg   hover:bg-blue-600 transition-colors duration-200 "
+        className="bg-primary text-white w-full p-3 rounded-lg   hover:bg-blue-600 transition-colors duration-200 add-to-cart-btn "
         type="button"
         onClick={addToCart}
       >

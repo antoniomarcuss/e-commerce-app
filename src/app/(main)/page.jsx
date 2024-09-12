@@ -5,10 +5,11 @@ import {
 } from "@tanstack/react-query";
 import HomeContent from "./components/Content";
 import { BASE_URL } from "@/consts";
+import { ProductsService } from "@/services/products";
 
 const Home = async ({ searchParams }) => {
   let page = 1;
-  const perPage = 10;
+  const perPage = 12;
   if (searchParams.page && searchParams.page > 0) {
     page = Number(searchParams.page);
   }
@@ -16,17 +17,17 @@ const Home = async ({ searchParams }) => {
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
     queryKey: ["products", page],
-    // queryFn: async () => (await ProductsService.findAll(page, perPage)).data,
-    queryFn: async () => {
-      const response = await fetch(
-        `${BASE_URL}/products?page=${page}&perPage=${perPage}`,
-        {
-          next: { revalidate: 10 },
-        }
-      );
-      const data = await response.json();
-      return data;
-    },
+    queryFn: async () => (await ProductsService.findAll(page, perPage)).data,
+    // queryFn: async () => {
+    //   const response = await fetch(
+    //     `${BASE_URL}/products?page=${page}&perPage=${perPage}`,
+    //     {
+    //       next: { revalidate: 1 },
+    //     }
+    //   );
+    //   const data = await response.json();
+    //   return data;
+    // },
   });
 
   return (

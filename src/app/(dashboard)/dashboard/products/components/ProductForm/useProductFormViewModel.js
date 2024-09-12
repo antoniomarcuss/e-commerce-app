@@ -29,12 +29,23 @@ export const useProductFormViewModel = (productId) => {
 
   const { data } = useQuery({
     queryKey: ["product", productId],
-    queryFn: async () => (await ProductsService.findById(productId)).data,
+    queryFn: async () => {
+      const { data } = await ProductsService.findById(productId);
+      return data;
+    },
     enabled: !!productId,
   });
 
+  const { data: categoriesData } = useQuery({
+    queryKey: ["categories"],
+    queryFn: async () => {
+      const { data } = await CategoriesService.findAll();
+      return data;
+    },
+  });
+
   useEffect(() => {
-    if (productId && data) {
+    if (productId && data && categoriesData) {
       reset({
         name: data.name,
         description: data.description,
@@ -45,12 +56,7 @@ export const useProductFormViewModel = (productId) => {
         insertImg: !!data.imgSrc,
       });
     }
-  }, [productId, data, reset]);
-
-  const { data: categoriesData } = useQuery({
-    queryKey: ["categories"],
-    queryFn: async () => (await CategoriesService.findAll()).data,
-  });
+  }, [productId, data, reset, categoriesData]);
 
   const onPriceChangeHandler = (event) => {
     const { value } = event.target;
@@ -82,37 +88,29 @@ export const useProductFormViewModel = (productId) => {
       description: data.description,
       categoryId: data.category,
     };
-    if (productId) {
-      try {
+
+    try {
+      if (productId) {
         await ProductsService.update(productId, body);
         if (typeof data.file !== "string" && data.insertImg && data.file) {
           await uploadImage(data.file, productId);
         }
-        router.push("/dashboard/products");
-        queryClient.refetchQueries({
-          queryKey: ["product", productId],
-        });
-      } catch ({ response }) {
-        setError("category", {
-          type: "manual",
-          message:
-            response.data.message || "Ocorreu um erro ao editar o produto!",
-        });
-      }
-    } else {
-      try {
+      } else {
         const response = await ProductsService.create(body);
         if (data.insertImg) {
           await uploadImage(data.file, response.data.id);
         }
-        router.push("/dashboard/products");
-      } catch ({ response }) {
-        alert("Ocorreu um erro ao criar o produto ");
       }
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+      queryClient.invalidateQueries({ queryKey: ["product", productId] });
+      router.push("/dashboard/products");
+    } catch ({ response }) {
+      setError("category", {
+        type: "manual",
+        message:
+          response.data.message || "Ocorreu um erro ao salvar o produto!",
+      });
     }
-    queryClient.refetchQueries({
-      queryKey: ["products"],
-    });
   };
 
   return {

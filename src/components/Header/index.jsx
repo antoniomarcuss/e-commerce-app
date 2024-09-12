@@ -20,7 +20,7 @@ const Header = () => {
     <header className=" py-4 flex justify-between items-center relative ">
       {user && (
         <div className="flex gap-4 items-center justify-center">
-          <button onClick={handleOpenSetting}>
+          <button id="settings" onClick={handleOpenSetting}>
             <CiSettings className="text-2xl md:text-2xl hover:animate-spin   " />
           </button>
         </div>

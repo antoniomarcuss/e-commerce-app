@@ -27,6 +27,7 @@ const Modal = ({ title, onClose, onCancel, content, onConfirm, isOpen }) => {
               Cancelar
             </button>
             <button
+              id="confirm"
               type="button"
               className="flex-1 border p-4 rounded-lg bg-green-500 text-white font-medium transition-colors duration-300 hover:bg-green-600"
               onClick={onConfirm}

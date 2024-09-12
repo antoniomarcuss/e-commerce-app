@@ -32,7 +32,7 @@ const Sidebar = () => {
       </ul>
 
       <div className="flex w-full ml-4 md:ml-0 ">
-        <button onClick={handleOpenSetting}>
+        <button id="settings" onClick={handleOpenSetting}>
           <CiSettings className="text-xl md:text-2xl hover:animate-spin" />
         </button>
 

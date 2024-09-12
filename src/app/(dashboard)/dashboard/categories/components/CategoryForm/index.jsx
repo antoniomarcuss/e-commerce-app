@@ -10,6 +10,7 @@ import { CategoriesService } from "@/services/categories";
 
 const CategoryForm = async ({ categoryId }) => {
   const queryClient = new QueryClient();
+
   await queryClient.prefetchQuery({
     queryKey: ["category", categoryId],
     queryFn: async () => (await CategoriesService.findById(categoryId)).data,
