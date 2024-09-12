@@ -18,10 +18,10 @@ const ProductCard = ({ product }) => {
       : 1;
 
   return (
-    <div className=" rounded-lg border  w-full sm:max-w-64 ">
+    <div className=" rounded-lg border  md:w-[170px] lg:w-52  ">
       <Link href={`viewProduct/${product.id}?page=${currentPage}`}>
         <abbr title={`Ver ${product.name}`}>
-          <div>
+          <div className=" flex justify-center md:min-h-40">
             <Image
               src={
                 product.imgSrc

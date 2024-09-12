@@ -1,8 +1,8 @@
 "use client";
 import { useHomeContentViewModel } from "./useHomeContentViewModel";
 import SearchBar from "../SearchBar";
-import ProductCard from "../ProductCard";
 import Pagination from "@/components/Pagination";
+import ProductList from "./components/ProductList";
 
 const HomeContent = ({ defaultPage }) => {
   const {
@@ -28,23 +28,11 @@ const HomeContent = ({ defaultPage }) => {
                   Produto não encontrado.
                 </p>
               ) : (
-                <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4  lg:grid-cols-5 xl:grid-cols-6 mt-6  justify-items-center sm:justify-items-start   ">
-                  {searchedProducts.map((product) => (
-                    <li key={product.id}>
-                      <ProductCard product={product} />
-                    </li>
-                  ))}
-                </ul>
+                <ProductList item={searchedProducts} />
               )}
             </>
           ) : (
-            <ul className="grid grid-cols-2 sm:grid-cols-3  md:grid-cols-4 gap-2 sm:gap-x-0 lg:grid-cols-5 xl:grid-cols-6 mt-6  justify-items-center   sm:justify-items-start   ">
-              {products.map((product) => (
-                <li key={product.id}>
-                  <ProductCard product={product} />
-                </li>
-              ))}
-            </ul>
+            <ProductList item={products} />
           )}
         </>
       </div>
