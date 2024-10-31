@@ -9,7 +9,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "shop-api-production-fde1.up.railway.app",
+        hostname: "shop-api-production-5332.up.railway.app",
       },
     ],
   },
