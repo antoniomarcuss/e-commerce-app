@@ -1,36 +1,9 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Desenvolvi um E-commerce pensando em oferecer uma experiência rápida e otimizada para os usuários. 
 
-## Getting Started
+Para garantir que as páginas fossem bem indexadas nos mecanismos de busca (SEO), utilizei Next.js para pré-renderizar os produtos, o que também contribuiu para a performance do site.
 
-First, run the development server:
+Na estilização, usei Tailwind CSS, que me permitiu criar um design moderno e responsivo. O E-commerce é integrado a uma API, e utilizei Axios para fazer as requisições de dados. 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Para evitar requisições desnecessárias e armazenar dados em cache implementei o React Query. Para o gerenciamento global da aplicação e persistir os dados utilizei o zustand. Na parte de formulários, o React Hook Form foi a escolha para facilitar o manuseio e, em conjunto com o Yup, consegui validar os dados de forma eficiente. 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Por fim, para garantir que tudo estivesse funcionando como deveria, utilizei Cypress para realizar testes End-to-End, assegurando que a aplicação entregue qualidade e estabilidade.
