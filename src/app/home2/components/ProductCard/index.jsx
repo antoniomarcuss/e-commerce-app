@@ -12,17 +12,20 @@ import Image from "next/image";
 const ProductCard = ({ product }) => {
   const { addToCart, openCartModal } = useProductCardViewModel(product);
   const items = userCartStore(({ items }) => items);
+
+  const imageUrl = product.imgSrc
+    ? `${BASE_URL.replace(/\/$/, "")}/${product.imgSrc.replace(/^\//, "")}`
+    : "./defalt.webp";
+  
+  console.log('imageUrl', imageUrl);
+  
   return (
     <div className=" rounded-lg border  ">
       <Link href={`viewProduct/${product.id}`}>
         <abbr title="Ver produto">
           <div>
             <Image
-              src={
-                product.imgSrc
-                  ? `${BASE_URL}/${product.imgSrc}`
-                  : "./defalt.webp"
-              }
+              src={product.imgSrc ? `${imageUrl}` : "./defalt.webp"}
               width={150}
               height={150}
               alt="nome"
