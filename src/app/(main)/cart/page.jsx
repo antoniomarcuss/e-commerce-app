@@ -63,7 +63,7 @@ const Cart = () => {
                   <tr key={id}>
                     <td className="w-28  ">
                       <Image
-                        src={imgSrc ? `${BASE_URL}${imgSrc}` : "/defalt.webp"}
+                        src={imgSrc ? `${BASE_URL}/${imgSrc}` : "/defalt.webp"}
                         alt={name}
                         width={100}
                         height={100}
