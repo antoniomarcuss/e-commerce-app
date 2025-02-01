@@ -52,7 +52,7 @@ const ProductsContent = ({ defaultPage }) => {
                   <th>{id}</th>
                   <td>
                     <Image
-                      src={imgSrc ? `${BASE_URL}/${imgSrc}` : "/defalt.webp"}
+                      src={imgSrc ? `${BASE_URL}${imgSrc}` : "/defalt.webp"}
                       alt={name}
                       className="w-10"
                       width={100}
