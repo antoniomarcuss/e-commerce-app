@@ -6,6 +6,9 @@ export const generateMetadata = async ({ params: { productId } }) => {
   const { data } = await ProductsService.findById(productId);
 
   return {
+    metadataBase: new URL(
+      process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
+    ),
     title: data.name,
     description: data.description,
     openGraph: {
@@ -23,13 +26,13 @@ export const generateMetadata = async ({ params: { productId } }) => {
   };
 };
 
-export const generateStaticParams = async () => {
-  const { data } = await ProductsService.findAll();
+// export const generateStaticParams = async () => {
+//   const { data } = await ProductsService.findAll();
 
-  return data.products.map((product) => ({
-    productId: String(product.id),
-  }));
-};
+//   return data.products.map((product) => ({
+//     productId: String(product.id),
+//   }));
+// };
 
 const ViewProductById = async ({ params: { productId } }) => {
   const { data } = await ProductsService.findById(productId);
@@ -40,5 +43,7 @@ const ViewProductById = async ({ params: { productId } }) => {
     </div>
   );
 };
+
+export const dynamic = "force-dynamic";
 
 export default ViewProductById;

@@ -1,13 +1,13 @@
 import { ProductsService } from "@/services/products";
 import ProductForm from "../../components/ProductForm";
 
-export const generateStaticParams = async () => {
-  const { data } = await ProductsService.findAll();
+// export const generateStaticParams = async () => {
+//   const { data } = await ProductsService.findAll();
 
-  return data.products.map((product) => ({
-    productId: String(product.id),
-  }));
-};
+//   return data.products.map((product) => ({
+//     productId: String(product.id),
+//   }));
+// };
 
 const EditProduct = ({ params: { productId } }) => {
   return (
@@ -17,5 +17,7 @@ const EditProduct = ({ params: { productId } }) => {
     </div>
   );
 };
+
+export const dynamic = "force-dynamic";
 
 export default EditProduct;

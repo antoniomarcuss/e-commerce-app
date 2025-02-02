@@ -1,11 +1,11 @@
 import { CategoriesService } from "@/services/categories";
 import CategoryForm from "../../components/CategoryForm";
 
-export const generateStaticParams = async () => {
-  const { data } = await CategoriesService.findAll();
+// export const generateStaticParams = async () => {
+//   const { data } = await CategoriesService.findAll();
 
-  return data.map((category) => ({ categoryId: String(category.id) }));
-};
+//   return data.map((category) => ({ categoryId: String(category.id) }));
+// };
 
 const EditCategory = ({ params: { categoryId } }) => {
   return (
@@ -15,5 +15,7 @@ const EditCategory = ({ params: { categoryId } }) => {
     </div>
   );
 };
+
+export const dynamic = "force-dynamic";
 
 export default EditCategory;
