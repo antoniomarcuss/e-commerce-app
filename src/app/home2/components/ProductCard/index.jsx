@@ -13,9 +13,10 @@ const ProductCard = ({ product }) => {
   const { addToCart, openCartModal } = useProductCardViewModel(product);
   const items = userCartStore(({ items }) => items);
 
-  const imageUrl = product.imgSrc
-    ? `${BASE_URL.replace(/\/$/, "")}/${product.imgSrc.replace(/^\//, "")}`
-    : "./defalt.webp";
+  const imageUrl = product.imgSrc?.startsWith("http")
+    ? product.imgSrc
+    : `${BASE_URL}/${product.imgSrc.replace(/^\//, "")}`;
+
   
   console.log('imageUrl', imageUrl);
   
