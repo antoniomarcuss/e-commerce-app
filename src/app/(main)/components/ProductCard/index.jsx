@@ -25,7 +25,7 @@ const ProductCard = ({ product }) => {
             <Image
               src={
                 product.imgSrc
-                  ? `${BASE_URL}/${product.imgSrc}`
+                  ? `${BASE_URL}/${product.imgSrc.replace(/^\//, "")}`
                   : "/defalt.webp"
               }
               width={150}
