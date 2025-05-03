@@ -9,6 +9,7 @@ const nextConfig = {
         pathname: "/images/**",
       },
     ],
+    unoptimized: true,
   },
 };
 export default nextConfig;
