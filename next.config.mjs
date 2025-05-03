@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "shop-api-production-161e.up.railway.app",
+        hostname: "shop-api-production-db87.up.railway.app",
       },
       // {
       //   protocol: "http",
@@ -15,5 +15,3 @@ const nextConfig = {
   },
 };
 export default nextConfig;
-
-

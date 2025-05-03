@@ -7,7 +7,6 @@ import { userCartStore } from "../../../../stores/cartStore";
 import CartModal from "../../../../components/CartModal";
 import Link from "next/link";
 import { BASE_URL } from "../../../../consts";
-import Image from "next/image";
 
 const ProductCard = ({ product }) => {
   const { addToCart, openCartModal } = useProductCardViewModel(product);
@@ -22,7 +21,7 @@ const ProductCard = ({ product }) => {
       <Link href={`viewProduct/${product.id}?page=${currentPage}`}>
         <abbr title={`Ver ${product.name}`}>
           <div className=" flex justify-center md:min-h-40">
-            <Image
+            <img
               src={
                 product.imgSrc
                   ? `${BASE_URL}/${product.imgSrc}`
