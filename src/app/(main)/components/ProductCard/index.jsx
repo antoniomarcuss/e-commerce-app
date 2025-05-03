@@ -17,6 +17,9 @@ const ProductCard = ({ product }) => {
       ? new URLSearchParams(window.location.search).get("page") || 1
       : 1;
 
+  if (!product) {
+    return null;
+  }
   return (
     <div className=" rounded-lg border  md:w-[170px] lg:w-52  ">
       <Link href={`viewProduct/${product.id}?page=${currentPage}`}>
@@ -31,6 +34,8 @@ const ProductCard = ({ product }) => {
               width={150}
               height={150}
               alt={product.name}
+              unoptimized={true} // Desativa a otimização do Next.js
+              priority={false}
               className=" object-contain rounded-t-lg "
             />
           </div>
