@@ -34,8 +34,6 @@ const ProductCard = ({ product }) => {
               width={150}
               height={150}
               alt={product.name}
-              unoptimized={true} // Desativa a otimização do Next.js
-              priority={false}
               className=" object-contain rounded-t-lg "
             />
           </div>
